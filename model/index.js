@@ -4,6 +4,7 @@ const Cheese = require('./cheese.model')
 
 
 Board.belongsTo(User)
+// User.hasOne(Board)
 User.hasMany(Board)
 Cheese.belongsToMany(Board, {through: 'Board_Cheese'})
 Board.belongsToMany(Cheese, {through: 'Board_Cheese'})

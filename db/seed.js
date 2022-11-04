@@ -6,9 +6,9 @@ async function seed() {
         force:true
     })
 
-    await Cheese.bulkCreate([
+    const tastyCheese = await Cheese.bulkCreate([
         {
-            title: 'Parmesan"',
+            title: 'Parmesan',
             description: 'The flavor power of parmesan can take a savory dish from acceptable to amazing with a dusting of this delicious cheese. Lots of words are used to describe parmesan: rich, tangy, nutty, sharp, complex, fruity, and bold to name a few. It has a somewhat gritty texture and a strong umami taste.'
         },
         {
@@ -29,7 +29,7 @@ async function seed() {
         },
         {
             title: 'Gouda',
-            description: 'ypically made from cows milk, this semi-hard cheese is characterised by its aromatic and caramel-like flavour combined with its dense and springy texture. Hints of nuts with sweet and creamy notes embrace your palate in a graceful sensation and, depending on the age, the finish ranges from smooth to sharp.'
+            description: 'Typically made from cows milk, this semi-hard cheese is characterised by its aromatic and caramel-like flavour combined with its dense and springy texture. Hints of nuts with sweet and creamy notes embrace your palate in a graceful sensation and, depending on the age, the finish ranges from smooth to sharp.'
         },
         {
             title: 'Comte',
@@ -93,7 +93,7 @@ async function seed() {
         }
     ])
 
-    await Board.bulkCreate([
+    const cheeseBoard = await Board.bulkCreate([
         {
             type: 'Bamboo Chopping Board',
             description: 'This design has juice grooves to capture any meat or vegetable juice when preparing food. Made of natural bamboo, its hard-wearing and ideal for food preparation. Bamboo absorbs less water, making it easy to clean and hygienic.',
@@ -144,10 +144,9 @@ async function seed() {
             description: 'Rarely is a serving board so full-service. Made from acacia wood, this one clocks in at just over a foot in diameter, so theres ample space for fine fromages and a routed section for crackers.',
             rating: 5
         }
-
     ])
 
-    await User.bulkCreate ([
+    const boardUser = await User.bulkCreate ([
         {
             name: 'April',
             email: 'april@itsnearlychristmas.com'
@@ -193,6 +192,18 @@ async function seed() {
             email: 'franklyn@itsnearlychristmas.com'
         }
     ])
+
+    for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 5; j++) {
+            let randomNumber = Math.floor(Math.random() * 21) + 1
+            await cheeseBoard[i].addCheese(randomNumber)
+        }
+    }
+
+    for (let i = 0; i < boardUser.length; i++) {
+        let randomNumber = Math.floor(Math.random() * 15) + 1
+        await boardUser[i].addBoard(randomNumber)
+    }
 }
 
 seed()
